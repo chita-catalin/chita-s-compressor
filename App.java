@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
 import java.awt.*;
 import java.awt.datatransfer.*;
 import java.awt.dnd.*;
@@ -26,14 +28,15 @@ public class App extends JFrame {
     private JPanel imagePanel = new JPanel(new BorderLayout());
 
     public App() {
-        super("Image Uploader");
+        super("chita's compressor");
 
         // Set up the main panel
         JPanel mainPanel = new JPanel();
-        JPanel leftPanel = new JPanel();
-        JPanel rightPanel = new JPanel();
+        imageSizeLabel.setBorder(new EmptyBorder(0, 0, 10, 0));
+        imagePanel.setBorder(BorderFactory.createLineBorder(Color.black));
 
         mainPanel.setLayout(new BorderLayout());
+        mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         // Create the button and add action listener
         JButton uploadButton = new JButton("Upload Image");
@@ -108,6 +111,7 @@ public class App extends JFrame {
 
         // Create a panel for the buttons and slider
         JPanel controlsPanel = new JPanel();
+        controlsPanel.setBorder(new EmptyBorder(10, 0, 0, 0));
         controlsPanel.setLayout(new BorderLayout());
         controlsPanel.add(uploadButton, BorderLayout.WEST);
         controlsPanel.add(downloadButton, BorderLayout.EAST);
@@ -117,14 +121,12 @@ public class App extends JFrame {
         mainPanel.add(imageSizeLabel, BorderLayout.NORTH);
         mainPanel.add(controlsPanel, BorderLayout.SOUTH);
         mainPanel.add(imagePanel, BorderLayout.CENTER);
-        mainPanel.add(leftPanel, BorderLayout.WEST);
-        mainPanel.add(rightPanel, BorderLayout.EAST);
 
         // Add the main panel to the frame
         add(mainPanel);
 
         // Set up the frame
-        setSize(800, 600);
+        setSize(600, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
     }
@@ -193,7 +195,7 @@ public class App extends JFrame {
 
             // Calculate the maximum allowed dimensions for the image while maintaining
             // aspect ratio
-            double imageAspectRatio = (double) imagePanel.getWidth() / (double) imagePanel.getHeight();
+            double imageAspectRatio = (double) compressedImage.getWidth() / (double) compressedImage.getHeight();
             int maxWidth = panelWidth;
             int maxHeight = panelHeight;
 
